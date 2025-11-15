@@ -1,37 +1,54 @@
-import { type User, type InsertUser } from "@shared/schema";
+import { 
+  type ContactMessage, 
+  type InsertContactMessage,
+  type ChatbotMessage,
+  type InsertChatbotMessage 
+} from "@shared/schema";
 import { randomUUID } from "crypto";
 
-// modify the interface with any CRUD methods
-// you might need
-
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
+  getContactMessages(): Promise<ContactMessage[]>;
+  createChatbotMessage(message: InsertChatbotMessage): Promise<ChatbotMessage>;
+  getChatbotMessagesBySession(sessionId: string): Promise<ChatbotMessage[]>;
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<string, User>;
+  private contactMessages: Map<string, ContactMessage>;
+  private chatbotMessages: Map<string, ChatbotMessage>;
 
   constructor() {
-    this.users = new Map();
+    this.contactMessages = new Map();
+    this.chatbotMessages = new Map();
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
+  async createContactMessage(insertMessage: InsertContactMessage): Promise<ContactMessage> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    const message: ContactMessage = {
+      ...insertMessage,
+      id,
+    };
+    this.contactMessages.set(id, message);
+    return message;
+  }
+
+  async getContactMessages(): Promise<ContactMessage[]> {
+    return Array.from(this.contactMessages.values());
+  }
+
+  async createChatbotMessage(insertMessage: InsertChatbotMessage): Promise<ChatbotMessage> {
+    const id = randomUUID();
+    const message: ChatbotMessage = {
+      ...insertMessage,
+      id,
+    };
+    this.chatbotMessages.set(id, message);
+    return message;
+  }
+
+  async getChatbotMessagesBySession(sessionId: string): Promise<ChatbotMessage[]> {
+    return Array.from(this.chatbotMessages.values())
+      .filter(msg => msg.sessionId === sessionId);
   }
 }
 
