@@ -37,7 +37,8 @@ export function Hero() {
     }),
   };
 
-  const name = "VIVEK KUMAR MODAK";
+  const firstLine = "VIVEK KUMAR";
+  const secondLine = "MODAK";
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 px-4">
@@ -60,19 +61,62 @@ export function Hero() {
             
             <div className="overflow-hidden">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-wider" style={{ fontFamily: 'Orbitron, sans-serif' }}>
-                {name.split('').map((letter, i) => (
-                  <motion.span
-                    key={i}
-                    custom={i}
-                    variants={letterVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className={`inline-block ${letter === ' ' ? 'w-4' : ''} text-glow text-foreground`}
-                    data-testid={`hero-letter-${i}`}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
+                <motion.div className="block overflow-hidden mb-2" variants={itemVariants}>
+                  <span className="inline-block whitespace-nowrap">
+                      {firstLine.split("").map((letter, i) => {
+                        if (letter === " ") {
+                          return (
+                            <motion.span
+                              key={`first-space-${i}`}
+                              className="inline-block w-4"
+                              aria-hidden="true"
+                            />
+                          );
+                        }
+
+                        return (
+                          <motion.span
+                            key={`first-${i}`}
+                            custom={i}
+                            variants={letterVariants}
+                            initial="hidden"
+                            animate="visible"
+                            className="inline-block text-glow text-foreground"
+                            data-testid={`hero-letter-first-${i}`}
+                          >
+                            {letter}
+                          </motion.span>
+                        );
+                      })}
+                  </span>
+                </motion.div>
+
+                <motion.div className="block overflow-hidden" variants={itemVariants}>
+                  <span className="inline-block whitespace-nowrap text-primary/90 text-shadow-lg">
+                    {secondLine.split("").map((letter, i) => (
+                      <motion.span
+                        key={`second-${i}`}
+                        custom={firstLine.length + 1 + i}
+                        variants={letterVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="inline-block text-glow text-foreground"
+                        data-testid={`hero-letter-second-${i}`}
+                      >
+                        {letter}
+                      </motion.span>
+                    ))}
+                  </span>
+
+                  {/* neon underline effect */}
+                  <motion.div
+                    className="mt-3 h-1 w-40 bg-gradient-to-r from-primary to-accent rounded-full"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: [0, 1, 0.9, 1] }}
+                    transition={{ duration: 1.6, ease: 'easeInOut', repeat: Infinity }}
+                    style={{ transformOrigin: 'left' }}
+                  />
+                </motion.div>
               </h1>
             </div>
 
@@ -159,7 +203,7 @@ export function Hero() {
             <Button 
               size="icon" 
               variant="outline"
-              onClick={() => window.open('tel:+918969790825', '_blank')}
+              onClick={() => window.open('tel:+918987720317', '_blank')}
               className="hover-elevate"
               data-testid="button-phone"
             >

@@ -14,6 +14,7 @@ export function Projects() {
     {
       title: "AI-Powered Research Assistant with RAG & Agentic AI",
       description: "Built an intelligent research assistant combining Retrieval-Augmented Generation with multi-agent systems for context-aware responses and automated task execution.",
+      link:"" ,
       features: [
         "RAG implementation with embeddings and vector databases (Pinecone/FAISS)",
         "Agentic AI layer using LangChain Agents for multi-step reasoning",
@@ -25,6 +26,7 @@ export function Projects() {
     {
       title: "WhatsApp Chat Analysis System",
       description: "Comprehensive chat analytics tool that extracts meaningful insights from WhatsApp conversations using NLP and data visualization techniques.",
+      link:"",
       features: [
         "Word frequency analysis and sentiment tracking",
         "Interactive visualizations with Matplotlib",
@@ -36,6 +38,7 @@ export function Projects() {
     {
       title: "Text Summarization Website",
       description: "Web-based NLP application that generates concise, meaningful summaries from large text documents using state-of-the-art transformer models.",
+      link:"",
       features: [
         "Pre-trained NLP models from Hugging Face Transformers",
         "Optimized summarization accuracy and coherence",
@@ -47,6 +50,7 @@ export function Projects() {
     {
       title: "Multiple Disease Prediction System",
       description: "Machine learning platform for diagnosing multiple diseases from user symptoms with high accuracy across various medical datasets.",
+      link:"" ,
       features: [
         "Predictive models for Diabetes, Heart Disease, and Eye conditions",
         "Flask web interface for seamless user interaction",
@@ -58,6 +62,7 @@ export function Projects() {
     {
       title: "Movie Recommendation System",
       description: "Intelligent recommendation engine using collaborative filtering and machine learning to suggest personalized movie choices based on user preferences.",
+      link:"",
       features: [
         "Collaborative filtering algorithms",
         "Data modeling with Python",
@@ -101,8 +106,10 @@ export function Projects() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              onClick={() => project.link && window.open(project.link, "_blank")}
+              className="cursor-pointer"
             >
-              <Card className="p-6 md:p-8 glassmorphic border-primary/20 hover-elevate h-full group" data-testid={`project-card-${index}`}>
+              <Card className="p-6 md:p-8 glassmorphic border-primary/20 hover-elevate h-full group cursor-pointer" data-testid={`project-card-${index}`}>
                 <div className="mb-4">
                   <h3 className="text-xl md:text-2xl font-semibold mb-3 group-hover:text-primary transition-colors">
                     {project.title}

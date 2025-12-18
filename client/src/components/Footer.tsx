@@ -22,7 +22,7 @@ export function Footer() {
     },
     {
       icon: Phone,
-      label: "+91 8969790825",
+      label: "+91 8987720317",
       href: "tel:+918969790825",
     },
     {
@@ -41,7 +41,7 @@ export function Footer() {
     {
       icon: Github,
       label: "GitHub",
-      href: "https://github.com/vivekkumarmodak",
+      href: "https://github.com/vivekkumarmodak29",
     },
   ];
 

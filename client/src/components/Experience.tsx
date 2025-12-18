@@ -32,7 +32,7 @@ export function Experience() {
       institution: "Sarala Birla University",
       duration: "2021 - 2025",
       grade: "7.98 CGPA",
-      status: "In Progress",
+      status: "Completed",
     },
     {
       degree: "Higher Secondary Education",
@@ -152,9 +152,20 @@ export function Experience() {
               >
                 <Card className="p-6 glassmorphic border-primary/20 hover-elevate h-full" data-testid={`education-card-${index}`}>
                   <div className="mb-4">
-                    <Badge variant={index === 0 ? "default" : "outline"} className="mb-3">
-                      {edu.status}
-                    </Badge>
+                    {/* Color 'Completed' badges green */}
+                    {(() => {
+                      const isCompleted = String(edu.status).toLowerCase().includes("completed");
+                      return (
+                        <Badge
+                          variant={isCompleted ? "default" : index === 0 ? "default" : "outline"}
+                          className={
+                            "mb-3 " + (isCompleted ? "bg-blue-600 text-blue-50 border-transparent" : "")
+                          }
+                        >
+                          {edu.status}
+                        </Badge>
+                      );
+                    })()}
                     <h4 className="text-lg font-semibold mb-2">{edu.degree}</h4>
                     <p className="text-sm text-muted-foreground mb-1">{edu.institution}</p>
                     <p className="text-xs text-muted-foreground">{edu.duration}</p>
